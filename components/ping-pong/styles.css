@@ -1,0 +1,10 @@
+button {
+  width: 40px;
+  height: 40px;
+}
+button[ping] {
+  background-color: red;
+}
+button[pong] {
+  background-color: green;
+}
