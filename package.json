@@ -1,0 +1,30 @@
+{
+  "name": "playground-webcomponents",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "http-server": "^0.11.1",
+    "mocha": "^5.0.5",
+    "sinon": "^4.5.0"
+  },
+  "scripts": {
+    "test": "cypress open",
+    "test:cypress:lights-off": "cypress run -b chrome -P components/lights-off",
+    "start": "http-server ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/makeros/playground-webcomponents.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/makeros/playground-webcomponents/issues"
+  },
+  "homepage": "https://github.com/makeros/playground-webcomponents#readme",
+  "devDependencies": {
+    "cypress": "^2.1.0"
+  }
+}

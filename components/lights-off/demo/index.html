@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Lights off demo</title>
+  <link rel="stylesheet" href="../styles.css"/>
+  <script type="module" src="../index.js"></script>
+</head>
+<body>
+  <a href="../test">Unit tests</a>
+  <h1><span id="game-status">In progress.</span> Moves:<span id="game-moves">0</span></h1>
+  <div id="set-level">
+    <button name="inc">+</button>
+    <button name="dec">-</button>
+    <button name="reset">reset level</button>
+  </div>
+  <amo-lights-off
+    level="5">
+  </amo-lights-off>
+
+
+  <script>
+    const game = document.querySelector('amo-lights-off')
+    const gameStatus = document.querySelector('#game-status')
+    const gameMoves = document.querySelector('#game-moves')
+    const setLevel = document.querySelector("#set-level")
+
+    game.addEventListener('amo-lights-off-end', () => gameStatus.textContent = 'Well done!')
+
+    game.addEventListener('amo-lights-off-move', (e) => gameMoves.textContent = e.detail.movesCount)
+
+    let level = 5
+    setLevel.addEventListener('click', (e) => {
+      switch (e.target.name) {
+        case 'inc':
+          game.level = ++level
+          break
+        case 'dec':
+          game.level = --level
+          break
+        case 'reset': {
+          game.reload()
+          break
+        }
+      }
+      gameStatus.textContent = 'In progress.'
+      gameMoves.textContent = '0'
+    })
+  </script>
+</body>
+</html>

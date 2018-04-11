@@ -1,0 +1,14 @@
+amo-lights-off button {
+  width: 40px;
+  height: 40px;
+  border: 1px grey solid;
+  margin: 1px;
+}
+
+amo-lights-off button[isOn=false] {
+  background-color: green
+}
+
+amo-lights-off button[isOn=true] {
+  background-color: greenyellow
+}

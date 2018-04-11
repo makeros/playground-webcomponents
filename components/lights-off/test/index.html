@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Lights off test</title>
+</head>
+<body>
+  <div id="mocha"></div>
+
+  <link href="/node_modules/mocha/mocha.css" rel="stylesheet" />
+  <script src="/node_modules/mocha/mocha.js"></script>
+  <script src="/node_modules/chai/chai.js"></script>
+  <script src="/node_modules/sinon/pkg/sinon.js"></script>
+
+  <script>mocha.setup('bdd')</script>
+
+  <script type="module">
+    import LightsOff from '../index.js'
+
+    describe('LightsOff', function() {
+
+      describe('static methods', function() {
+        describe('_toggleFields', function () {
+          it('should toggle selected indexes to the opposite value', function() {
+            const fields = [true, true, false]
+
+            chai.expect(LightsOff._toggleFields([0, 1], fields))
+            .to.eql([false, false, false])
+          });
+        })
+        describe('generateFields', function () {
+          it('should generate array with selected fields', function (){
+            let result
+            const findIndexes = (acc, item, index) => item === true ? acc.concat(index) : acc
+
+            result = LightsOff.generateFields(5)
+            chai.expect(result).to.have.length(25)
+            chai.expect(
+              result.reduce(findIndexes, [])
+            ).to.eql([0, 1 ,5])
+
+            result = LightsOff.generateFields(7)
+            chai.expect(result).to.have.length(49)
+            chai.expect(
+              result.reduce(findIndexes, [])
+            ).to.eql([0, 1 ,7])
+          })
+        })
+      })
+
+      describe('public methods', function () {
+        describe('restart', function () {
+          it('should initialize the game with level number as an input', function () {
+            const attrStub = sinon.stub(LightsOff.prototype, 'getAttribute')
+            const generateStub = sinon.stub(LightsOff, 'generateFields')
+            const fieldsMock = [true, true, true, true]
+
+            attrStub.returns(4)
+            generateStub.withArgs(4).returns(fieldsMock)
+
+            const instance = new LightsOff() //document.createElement('amo-lights-off')
+            chai.expect(instance._level).to.equal(4)
+            chai.expect(generateStub.called).to.be.true
+            chai.expect(instance.fields).to.equal(fieldsMock)
+          })
+        })
+      })
+    })
+
+    mocha.checkLeaks();
+    mocha.run();
+  </script>
+
+</body>
+</html>
