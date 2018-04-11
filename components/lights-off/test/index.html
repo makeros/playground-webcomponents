@@ -50,8 +50,8 @@
         })
       })
 
-      describe('public methods', function () {
-        describe('restart', function () {
+      describe('creating instance', function () {
+        describe('at construction time', function () {
           it('should initialize the game with level number as an input', function () {
             const attrStub = sinon.stub(LightsOff.prototype, 'getAttribute')
             const generateStub = sinon.stub(LightsOff, 'generateFields')
