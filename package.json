@@ -11,7 +11,7 @@
   },
   "scripts": {
     "test": "cypress open",
-    "test:cypress:lights-off": "cypress run -b chrome -P components/lights-off",
+    "test:cypress:lights-off": "$(npm bin)/cypress run -b chrome -P components/lights-off",
     "start": "http-server ."
   },
   "repository": {
