@@ -1,0 +1,7 @@
+amo-custom-test:not(:defined) {
+  background-color: light-gray;
+  color: gray;
+}
+amo-custom-test:not(:defined):before {
+  content: '/not-defined/';
+}

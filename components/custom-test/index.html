@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Playground webcomponents</title>
+  <link rel="stylesheet" href="styles.css"
+</head>
+<body>
+  <amo-custom-test id="test1" color="red">
+    I'm not upgraded :(
+  </amo-custom-test>
+  <div>
+    <button id="change-color-tes1">
+      Change color
+    </button>
+  </div>
+
+  <iframe id="another-frame"></iframe>
+
+  <script>
+    const COLORS = ['red', 'blue', 'green', 'navy', 'gray', 'pink']
+    const customTest = document.querySelector('amo-custom-test#test1')
+
+    window.customElements.whenDefined('amo-custom-test')
+      .then(() => {
+        console.log('amo-custom-test is now defined!!!')
+
+        document.querySelector('button#change-color-tes1')
+        .addEventListener('click', () => {
+          customTest.color = COLORS[getRandomInt(COLORS.length - 1)]
+        })
+      })
+      .catch(() => {
+        console.log('When defined error!!!')
+      })
+
+
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * Math.floor(max));
+    }
+    </script>
+
+  <script src="index.js"></script>
+</body>
+</html>
